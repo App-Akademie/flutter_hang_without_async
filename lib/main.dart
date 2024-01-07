@@ -31,11 +31,12 @@ class HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
   bool isUserLoggedIn = false;
 
-  void onPress() {
+  void onPress() async {
     setState(() {
       _isLoading = true;
     });
-    isUserLoggedIn = widget.mockApi.loginUser();
+
+    isUserLoggedIn = await widget.mockApi.loginUser();
 
     setState(() {
       _isLoading = false;
