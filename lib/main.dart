@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: appTitle,
       home: HomeScreen(),
     );
@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final mockApi = MockApi();
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -27,13 +29,13 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
+  bool isUserLoggedIn = false;
 
-  void _onPress() {
+  void onPress() {
     setState(() {
       _isLoading = true;
     });
-    final mockApi = MockApi();
-    final isUserLoggedIn = mockApi.loginUser();
+    isUserLoggedIn = widget.mockApi.loginUser();
 
     setState(() {
       _isLoading = false;
@@ -51,9 +53,11 @@ class HomeScreenState extends State<HomeScreen> {
             if (_isLoading) const CircularProgressIndicator(),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _isLoading ? null : _onPress,
-              child: const Text('Start Operation'),
+              onPressed: _isLoading ? null : onPress,
+              child: const Text('Login User'),
             ),
+            const SizedBox(height: 8),
+            Text(isUserLoggedIn ? "User logged in" : "User logged OUT")
           ],
         ),
       ),
