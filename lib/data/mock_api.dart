@@ -1,14 +1,15 @@
 import 'dart:developer' as dev;
 import 'dart:io';
-import 'dart:math' as math;
 
-import 'package:flutter_hang_without_async/constants.dart';
+import 'package:flutter_hang_without_async/helper_functions.dart';
 
 class MockApi {
   bool loginUser() {
-    // Simulate a network request or a long-running task, between 4 and 7 seconds
+    // Simulate a network request or a long-running task.
     dev.log("Starting network call");
-    sleep(Duration(seconds: math.Random().nextInt(minimumDelaySeconds) + 4));
+    // await Future.delayed(getDelay());
+    sleep(getDelay());
+
     dev.log("Finished network call");
 
     return true;

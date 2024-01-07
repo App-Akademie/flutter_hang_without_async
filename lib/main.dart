@@ -35,6 +35,7 @@ class HomeScreenState extends State<HomeScreen> {
     setState(() {
       _isLoading = true;
     });
+
     isUserLoggedIn = widget.mockApi.loginUser();
 
     setState(() {
