@@ -7,7 +7,7 @@ class MockApi {
   bool loginUser() {
     // Simulate a network request or a long-running task.
     dev.log("Starting network call");
-    // await Future.delayed(getDelay());
+
     sleep(getDelay());
 
     dev.log("Finished network call");
