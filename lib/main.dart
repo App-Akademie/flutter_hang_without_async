@@ -24,22 +24,22 @@ class HomeScreen extends StatefulWidget {
   final mockApi = MockApi();
 
   @override
-  HomeScreenState createState() => HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
-  bool _isLoading = false;
+class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = false;
   bool isUserLoggedIn = false;
 
   void onPress() {
     setState(() {
-      _isLoading = true;
+      isLoading = true;
     });
 
     isUserLoggedIn = widget.mockApi.loginUser();
 
     setState(() {
-      _isLoading = false;
+      isLoading = false;
     });
   }
 
@@ -51,10 +51,10 @@ class HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            if (_isLoading) const CircularProgressIndicator(),
+            if (isLoading) const CircularProgressIndicator(),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _isLoading ? null : onPress,
+              onPressed: isLoading ? null : onPress,
               child: const Text('Login User'),
             ),
             const SizedBox(height: 8),
