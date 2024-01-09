@@ -30,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   bool isUserLoggedIn = false;
+  String apiResponseText = "";
 
   void onPress() async {
     setState(() {
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     isUserLoggedIn = await widget.mockApi.loginUser();
+    apiResponseText = await widget.mockApi.fetchData();
 
     setState(() {
       isLoading = false;
@@ -58,7 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Text('Login User'),
             ),
             const SizedBox(height: 8),
-            Text(isUserLoggedIn ? "User logged in" : "User logged OUT")
+            Text(isUserLoggedIn ? "User logged in" : "User logged OUT"),
+            const SizedBox(height: 8),
+            Text("API Response: \"$apiResponseText\""),
           ],
         ),
       ),
