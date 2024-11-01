@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: isLoading ? null : onPress,
-              child: const Text('Login User'),
+              child: Text(isUserLoggedIn ? 'Logout User' : 'Login User'),
             ),
             const SizedBox(height: 8),
             Text(isUserLoggedIn ? "User logged in" : "User logged OUT")
