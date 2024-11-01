@@ -33,12 +33,33 @@ class _HomeScreenState extends State<HomeScreen> {
   String apiResponseText = "";
 
   void onPress() async {
+    if (!isUserLoggedIn) {
+      loginUser();
+    } else {
+      logoutUser();
+    }
+  }
+
+  void loginUser() async {
     setState(() {
       isLoading = true;
     });
 
     isUserLoggedIn = await widget.mockApi.loginUser();
     apiResponseText = await widget.mockApi.fetchData();
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  void logoutUser() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    isUserLoggedIn = await widget.mockApi.logoutUser();
+    apiResponseText = "";
 
     setState(() {
       isLoading = false;
@@ -57,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: isLoading ? null : onPress,
-              child: const Text('Login User'),
+              child: Text(isUserLoggedIn ? 'Logout User' : 'Login User'),
             ),
             const SizedBox(height: 8),
             Text(isUserLoggedIn ? "User logged in" : "User logged OUT"),
